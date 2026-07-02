@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sekiro: Shadows Die Twice - Ultimate Wiki</title>
+    <style>
+        /* Vídeo de fundo fixo e responsivo */
+        #video-fundo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1000;
+            object-fit: cover;
+            filter: brightness(30%);
+        }
+
+        body { 
+            font-family: Arial, sans-serif; 
+            color: #e0e0e0; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #1a1a1a; 
+        }
+
+        header { 
+            background-color: rgba(51, 26, 26, 0.9); 
+            padding: 20px; 
+            text-align: center; 
+            border-bottom: 3px solid #802020; 
+        }
+
+        nav { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        
+        .nav-link { 
+            color: #ff6666; 
+            text-decoration: none; 
+            font-weight: bold; 
+            background: none;
+            border: none;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .nav-link:hover { text-decoration: underline; color: #ff9999; }
+
+        .secao-conteudo {
+            display: none; 
+            max-width: 900px; 
+            margin: 20px auto; 
+            padding: 25px; 
+            background-color: rgba(38, 38, 38, 0.95); 
+            border-radius: 8px; 
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.7);
+        }
+
+        .secao-conteudo.ativa { display: block; }
+
+        /* Estilização Geral */
+        h2 { color: #ff6666; border-bottom: 1px solid #555; padding-bottom: 8px; }
+        h3 { color: #ff9999; margin-top: 20px; }
+        p { line-height: 1.6; color: #dcdcdc; }
+        .img-conteudo { width: 100%; max-height: 380px; object-fit: cover; border-radius: 4px; margin: 15px 0; border: 1px solid #555; }
+        
+        /* Personagens */
+        .char-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 20px; }
+        .char-box { background-color: rgba(50, 50, 50, 0.7); padding: 20px; border-left: 4px solid #802020; border-radius: 4px; }
+        .img-char { width: 100%; max-height: 250px; object-fit: cover; margin-top: 10px; border: 1px solid #444; border-radius: 4px; }
+        
+        /* Tabelas */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: rgba(20, 20, 20, 0.6); }
+        th, td { padding: 12px; border: 1px solid #555; text-align: left; }
+        th { background-color: #331a1a; color: #ff6666; }
+        tr:nth-child(even) { background-color: rgba(45, 45, 45, 0.6); }
+        .img-chefe-tabela { width: 80px; height: 50px; object-fit: cover; border-radius: 3px; border: 1px solid #444; }
+
+        /* Formulários e Comentários */
+        .form-grupo { margin-bottom: 15px; display: flex; flex-direction: column; }
+        .form-grupo label { margin-bottom: 5px; font-weight: bold; color: #ff9999; }
+        .form-input, .form-textarea { padding: 10px; background-color: #1a1a1a; border: 1px solid #555; color: #fff; border-radius: 4px; font-size: 1em; }
+        .form-textarea { resize: vertical; min-height: 100px; }
+        .btn-enviar { background-color: #802020; color: white; border: none; padding: 12px 20px; font-size: 1em; font-weight: bold; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .btn-enviar:hover { background-color: #b33030; }
+        
+        .lista-comentarios { margin-top: 30px; background: rgba(20, 20, 20, 0.5); padding: 15px; border-radius: 6px; }
+        .comentario-item { border-bottom: 1px solid #444; padding: 12px 0; }
+        .comentario-item:last-child { border-bottom: none; }
+        .comentario-autor { font-weight: bold; color: #ff6666; margin-bottom: 4px; }
+        .comentario-data { font-size: 0.8em; color: #888; margin-left: 10px; }
+
+        footer { text-align: center; margin-top: 40px; font-size: 0.8em; color: #aaa; padding: 10px; background: rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body>
+
+<video autoplay muted loop id="video-fundo">
+    <source src="video-gameplay.mp4" type="video/mp4">
+</video>
+
+<header>
+    <h1>Sekiro: Shadows Die Twice Wiki</h1>
+    <p>O compêndio supremo sobre a terra de Ashina e o pacto de imortalidade</p>
+    <nav>
+        <button class="nav-link" onclick="mudarPagina('inicio')">Início</button> | 
+        <button class="nav-link" onclick="mudarPagina('historia')">História Completa</button> | 
+        <button class="nav-link" onclick="mudarPagina('personagens')">Personagens</button> | 
+        <button class="nav-link" onclick="mudarPagina('mecanicas')">Mecânicas</button> | 
+        <button class="nav-link" onclick="mudarPagina('chefes')">Chefes</button> | 
+        <button class="nav-link" onclick="mudarPagina('cadastro')">Cadastro & Dúvidas</button> | 
+        <button class="nav-link" onclick="mudarPagina('comentarios')">Comunidade</button>
+    </nav>
+</header>
+
+<main id="inicio" class="secao-conteudo ativa">
+    <h2>Bem-vindo à Shinobi Wiki</h2>
+    <img src="topo-sekiro.jpg" alt="Sekiro Art" class="img-conteudo">
+    <p><strong>Sekiro: Shadows Die Twice</strong> é uma obra-prima de ação furtiva e combate rítmico desenvolvida pela FromSoftware e dirigida por Hidetaka Miyazaki. Ambientado no sangrento e místico Período Sengoku no Japão, o jogo coloca você na pele de um guerreiro caído cuja única missão é resgatar e proteger seu jovem mestre.</p>
+    <p>Use o menu superior para navegar pela enciclopédia, registrar suas dúvidas com a comunidade e debater estratégias com outros shinobi na aba de comentários.</p>
+</main>
+
+<main id="historia" class="secao-conteudo">
+    <h2>A Crônica de Ashina e o Sangue do Dragão</h2>
+    <img src="ashina-cenario.jpg" alt="Castelo de Ashina" class="img-conteudo">
+    
+    <h3>O Golpe de Estado de Isshin</h3>
+    <p>Duas décadas antes dos eventos do jogo, o lendário mestre espadachim Isshin Ashina realizou uma rebelião sangrenta para retomar as terras de seu povo das mãos do Ministério do Interior. No rastro de destruição da guerra, um mestre Shinobi conhecido como Owl (Coruja) adota um órfão faminto no campo de batalha, batizando-o de Wolf (Lobo) e treinando-o sob o rígido Código de Ferro dos Shinobi.</p>
+    
+    <h3>O Declínio e o Sequestro</h3>
+    <p>Nos anos seguintes, a província de Ashina prosperou, mas agora se encontra à beira do colapso total. O velho Isshin adoeceu, e as forças do Ministério estão prontas para invadir e massacrar o clã. Desesperado para encontrar uma arma de defesa absoluta, o neto adotivo de Isshin, Genichiro Ashina, assume o controle militar e decide capturar o jovem lorde Kuro, o Descendente do Dragão.</p>
+    <p>Kuro possui em suas veias a Herança Divina, uma linhagem mística ligada ao Dragão Divino que concede a imortalidade absoluta àqueles que fazem um pacto de sangue com ele. Genichiro planeja usar esse poder para criar um exército imortal e proteger as fronteiras de Ashina a qualquer custo, mesmo sacrificando a humanidade de seu povo.</p>
+
+    <h3>O Despertar do Lobo</h3>
+    <p>Wolf, que passou anos trancado em um poço após perder seu propósito, é convocado a resgatar Kuro. Durante a tentativa de fuga, ele confronta Genichiro no campo de grama prata. Wolf é derrotado, perdendo seu braço esquerdo no processo, e Kuro é levado para o topo do castelo. No entanto, o pacto de imortalidade previamente selado entre Kuro e Wolf impede que o shinobi morra, trazendo-o de volta à vida no Templo Desolado.</p>
+    
+    <h3>Os Caminhos do Destino</h3>
+    <p>Equipado com a Prótese Shinobi dada pelo misterioso Escultor, Wolf parte em uma jornada implacável. Ele descobre que Kuro abomina o Sangue do Dragão, pois o poder corrompe a mente dos homens e espalha uma terrível praga chamada Mal da Estagnação (Dragonrot) para os vivos sempre que a ressurreição é usada. Kuro deseja realizar a "Ruptura da Imortalidade" para extinguir o poder da linhagem.</p>
+    <p>Para isso, Wolf precisa cruzar montanhas sagradas, o Vale Submerso e o Palácio da Fonte para reunir as relíquias necessárias: a Lágrima do Dragão Divino, a Flor de Lótus do Palácio e a Pedra do Abrigo. No processo, ele deve escolher entre manter sua lealdade cega ao Código de Ferro de seu pai adotivo, Owl (que secretamente deseja o poder para si), ou quebrar as regras para salvar o lorde Kuro, desencadeando diferentes destinos e finais para o Japão.</p>
+</main>
+
+<main id="personagens" class="secao-conteudo">
+    <h2>Enciclopédia de Personagens e Suas Funções</h2>
+    <div class="char-grid">
+        
+        <div class="char-box">
+            <h3>Wolf (Sekiro)</h3>
+            <p><strong>Função:</strong> Protagonista e executor da vontade do lorde. É o shinobi encarregado de resgatar Kuro e buscar os ingredientes necessários para quebrar a maldição da imortalidade ou derrotar aqueles que ameaçam seu mestre.</p>
+            <img src="wolf.jpg" alt="Wolf" class="img-char">
+        </div>
+
+        <div class="char-box">
+            <h3>Lorde Kuro</h3>
+            <p><strong>Função:</strong> O Descendente do Dragão. É o coração moral da trama, cujo objetivo é destruir a própria imortalidade para impedir que a ambição humana continue gerando guerras e sofrimento com a estagnação do sangue.</p>
+            <img src="kuro.jpg" alt="Lorde Kuro" class="img-char">
+        </div>
+
+        <div class="char-box">
+            <h3>Genichiro Ashina</h3>
+            <p><strong>Função:</strong> Antagonista principal da primeira metade do jogo. Líder militar de Ashina que busca escravizar o poder de Kuro para transformar suas tropas em soldados imortais, agindo puramente por um patriotismo distorcido.</p>
+            <img src="genichiro-char.jpg" alt="Genichiro" class="img-char">
+        </div>
+
+        <div class="char-box">
+            <h3>Isshin Ashina</h3>
+            <p><strong>Função:</strong> O lendário Santo da Espada. Embora aposentado e doente, ele atua como mentor secreto de Wolf sob o disfarce de "Tengu de Ashina", caçando espiões e oferecendo ensinamentos de combate avançados.</p>
+            <img src="isshin.jpg" alt="Isshin Ashina" class="img-char">
+        </div>
+
+        <div class="char-box">
+            <h3>O Escultor (Sekijo)</h3>
+            <p><strong>Função:</strong> Suporte tecnológico e espiritual. Salva Wolf no início do jogo, fornece e aprimora a Prótese Shinobi com novas armas em troca de ferramentas encontradas pelo mundo.</p>
+            <img src="escultor.jpg" alt="O Escultor" class="img-char">
+        </div>
+
+        <div class="char-box">
+            <h3>Emma, a Médica</h3>
+            <p><strong>Função:</strong> Suporte de cura e lore. Discípula do médico Dogen, ela ajuda Wolf criando remédios para curar o Mal da Estagnação (Dragonrot) e aprimorando o Cálice de Cura (Healing Gourd).</p>
+            <img src="emma.jpg" alt="Emma" class="img-char">
+        </div>
+
+        <div class="char-box">
+            <h3>Owl (Grande Shinobi Coruja)</h3>
+            <p><strong>Função:</strong> Pai adotivo e mentor original de Wolf. Cria o Código de Ferro e simula sua própria morte para ressurgir mais tarde como um traidor ganancioso que tenta assumir o controle do poder do dragão.</p>
+            <img src="owl.jpg" alt="Coruja" class="img-char">
+        </div>
+
+        <div class="char-box">
+            <h3>A Monja Corrompida / Lady Tomoe</h3>
+            <p><strong>Função:</strong> Guardiã do Palácio da Fonte. Protege os portões do reino divino e serve como um grande teste de combate para determinar se Wolf é digno de coletar as lágrimas do dragão.</p>
+            <img src="monja.jpg" alt="Monja Corrompida" class="img-char">
+        </div>
+
+        <div class="char-box">
+            <h3>Hanbei, o Imortal</h3>
+            <p><strong>Função:</strong> Boneco de treino vivo. Um guerreiro infetado pela imortalidade que se oferece para ser atacado por Wolf no Templo Desolado, permitindo que o jogador treine mecânicas de esquiva, defesa e contra-ataques sem penalidades.</p>
+            <img src="hanbei.jpg" alt="Hanbei" class="img-char">
+        </div>
+    </div>
+</main>
+
+<main id="mecanicas" class="secao-conteudo">
+    <h2>O Sistema de Combate</h2>
+    <p>Diferente de outros jogos da FromSoftware, Sekiro remove barras de stamina e foca no equilíbrio físico e no som do metal batendo contra o metal.</p>
+    <img src="combate-postura.jpg" alt="Sistema de Postura" class="img-conteudo">
+    <ul>
+        <li><strong>Postura (Posture):</strong> A mecânica central. Tanto o jogador quanto os inimigos têm uma barra de postura. Defender ataques no último milissegundo (Deflect) destrói a postura do oponente. Quando ela quebra, abre espaço para um Golpe Mortal (Deathblow) instantâneo, independentemente da vida restante.</li>
+        <li><strong>Contra-ataque Mikiri:</strong> Uma habilidade indispensável que permite pisar na arma de inimigos que tentam ataques de estocada perfurantes, gerando danomassivo de postura.</li>
+        <li><strong>Ferramentas de Prótese:</strong> Equipamentos acoplados ao braço de Wolf que exploram as fraquezas dos inimigos, como usar o Machado carregado para estraçalhar escudos de madeira ou o canhão de chamas contra monstros com pavor de fogo.</li>
+    </ul>
+</main>
+
+<main id="chefes" class="secao-conteudo">
+    <h2>Lista de Desafios Principais</h2>
+    <table>
+        <tr>
+            <th>Visual</th>
+            <th>Chefe</th>
+            <th>Localização</th>
+            <th>Fraqueza / Dica</th>
+        </tr>
+        <tr>
+            <td><img src="gyobu.jpg" alt="Gyobu" class="img-chefe-tabela"></td>
+            <td>Gyobu Oniwa</td>
+            <td>Portões do Castelo</td>
+            <td>Use Bombinhas Shinobi para atordoar a montaria dele constantemente.</td>
+        </tr>
+        <tr>
+            <td><img src="genichiro.jpg" alt="Genichiro" class="img-chefe-tabela"></td>
+            <td>Genichiro Ashina</td>
+            <td>Topo do Castelo Ashina</td>
+            <td>Mantenha pressão constante de ataques e use a devolução de raios na fase final.</td>
+        </tr>
+        <tr>
+            <td><img src="macaco.jpg" alt="Macaco" class="img-chefe-tabela"></td>
+            <td>Macaco Guardião</td>
+            <td>Vale Submerso</td>
+            <td>Use a Lança de Prótese para arrancar a centopeia de dentro do pescoço dele na fase 2.</td>
+        </tr>
+    </table>
+</main>
+
+<main id="cadastro" class="secao-conteudo">
+    <h2>Central do Shinobi: Cadastro & Suporte</h2>
+    <p>Cadastre sua conta na guilda e envie sua pergunta técnica ou sobre a lore do jogo. Nossos moderadores responderão diretamente no seu perfil fictício!</p>
+    
+    <form id="formCadastro" onsubmit="registrarDuvida(event)">
+        <div class="form-grupo">
+            <label for="nome">Nome de Usuário / Apelido Shinobi:</label>
+            <input type="text" id="nome" class="form-input" placeholder="Ex: Wolf_Do_Sengoku" required>
+        </div>
+        <div class="form-grupo">
+            <label for="email">E-mail para Notificação:</label>
+            <input type="email" id="email" class="form-input" placeholder="seu-email@dominio.com" required>
+        </div>
+        <div class="form-grupo">
+            <label for="duvida">Qual a sua dúvida sobre o Jogo?</label>
+            <textarea id="duvida" class="form-textarea" placeholder="Digite aqui sua dúvida sobre mecânicas, chefes ou lore..." required></textarea>
+        </div>
+        <button type="submit" class="btn-enviar">Cadastrar e Enviar Dúvida</button>
+    </form>
+</main>
+
+<main id="comentarios" class="secao-conteudo">
+    <h2>Mural da Comunidade</h2>
+    <p>Deixe suas dicas de combate, opiniões sobre a história ou ajude outros jogadores que estão travados em algum chefe!</p>
+    
+    <form id="formComentario" onsubmit="adicionarComentario(event)">
+        <div class="form-grupo">
+            <label for="autorComentario">Seu Nome:</label>
+            <input type="text" id="autorComentario" class="form-input" placeholder="Ex: Mestre_Das_Shurikens" required>
+        </div>
+        <div class="form-grupo">
+            <label for="textoComentario">Comentário:</label>
+            <textarea id="textoComentario" class="form-textarea" placeholder="Compartilhe seu conhecimento..." required></textarea>
+        </div>
+        <button type="submit" class="btn-enviar">Publicar Comentário</button>
+    </form>
+
+    <div class="lista-comentarios">
+        <h3>Discussões Recentes</h3>
+        <div id="containerComentarios">
+            <div class="comentario-item">
+                <div class="comentario-autor">Kuro_Fanboy <span class="comentario-data">02/07/2026</span></div>
+                <p>Alguém mais demorou mais de 3 dias para passar do Isshin, o Santo da Espada? A segunda fase dele com aquela lança é bizarra de difícil!</p>
+            </div>
+            <div class="comentario-item">
+                <div class="comentario-autor">Shinobi_Veterano <span class="comentario-data">01/07/2026</span></div>
+                <p>Dica crucial para quem está começando: Esqueçam o botão de esquiva do Dark Souls. Em Sekiro o segredo é ficar parado e sincronizar o som da espada com o botão de Deflect!</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 Sekiro Fan Wiki. Desenvolvido para fins educacionais e de entretenimento.</p>
+</footer>
+
+<script>
+    // Gerenciador de navegação entre abas
+    function mudarPagina(idSecao) {
+        const secoes = document.querySelectorAll('.secao-conteudo');
+        secoes.forEach(secao => {
+            secao.classList.remove('ativa');
+        });
+        
+        const secaoAlvo = document.getElementById(idSecao);
+        if (secaoAlvo) {
+            secaoAlvo.classList.add('ativa');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    // Processamento do formulário de Cadastro/Dúvidas
+    function registrarDuvida(event) {
+        event.preventDefault();
+        const nome = document.getElementById('nome').value;
+        const duvida = document.getElementById('duvida').value;
+
+        alert(`Obrigado pelo cadastro, ${nome}!\nSua dúvida ("${duvida.substring(0, 40)}...") foi enviada para análise e será respondida por e-mail.`);
+        document.getElementById('formCadastro').reset();
+    }
+
+    // Processamento do Mural de Comentários dinâmico
+    function adicionarComentario(event) {
+        event.preventDefault();
+        const autor = document.getElementById('autorComentario').value;
+        const texto = document.getElementById('textoComentario').value;
+        const container = document.getElementById('containerComentarios');
+        
+        // Formata a data atual
+        const hoje = new Date();
+        const dataFormatada = hoje.toLocaleDateString('pt-BR');
+
+        // Cria a estrutura HTML do novo comentário
+        const novoComentario = document.createElement('div');
+        novoComentario.className = 'comentario-item';
+        novoComentario.innerHTML = `
+            <div class="comentario-autor">${autor} <span class="comentario-data">${dataFormatada}</span></div>
+            <p>${texto}</p>
+        `;
+
+        // Insere o comentário no topo da lista
+        container.insertBefore(novoComentario, container.firstChild);
+        
+        // Limpa os campos do formulário
+        document.getElementById('formComentario').reset();
+    }
+</script>
+
+</body>
+</html>
